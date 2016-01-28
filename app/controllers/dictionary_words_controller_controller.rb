@@ -2,15 +2,18 @@ require 'json'
 require "#{Rails.root}/app/models/web_spellchecker.rb"
 
 class DictionaryWordsControllerController < ApplicationController
-  respond_to :json
 
   def spellcheck
       spellChecker = WebSpellchecker.new
       #@terms = spellChecker.correct(params[:term])
+      term = params[:term]
+      #suggestions = spellChecker.correct(term)
+      suggestions = spellChecker.known(term)
+
       hash = {
-        :term => params[:term],
+        :term => term,
         :known => true,
-        :suggestions => spellChecker.correct(params[:term])}
+        :suggestions => suggestions}
 
       render json: hash
   end

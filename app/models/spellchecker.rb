@@ -92,7 +92,7 @@ class Spellchecker
   def known(words)
     result = words.find_all {|w| @dictionary.key?(w) } #find all words for which condition is true
     if result.empty? 
-      return [] 
+      return []
     else
       return result.sort_by {|e| 1-@dictionary[e]} #sort by descending frequency
     end
