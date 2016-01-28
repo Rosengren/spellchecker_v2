@@ -7,12 +7,12 @@ class DictionaryWordsControllerController < ApplicationController
       spellChecker = WebSpellchecker.new
       #@terms = spellChecker.correct(params[:term])
       term = params[:term]
-      #suggestions = spellChecker.correct(term)
-      suggestions = spellChecker.known(term)
+      suggestions = spellChecker.correct(term)
+      known = spellChecker.known(term).any?
 
       hash = {
         :term => term,
-        :known => true,
+        :known => known,
         :suggestions => suggestions}
 
       render json: hash
